@@ -1,5 +1,5 @@
 var socket = io();
 
 socket.on('connect', function() {
-    alert('conacteds');
+    alert('conacteds !!');
 });
