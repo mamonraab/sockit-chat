@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var xssFilters = require('xss-filters');
+var moment = require('moment');
+var now = moment();
 //begin socket work
 var io = require('socket.io')(http);
 app.use(express.static(__dirname + '/www'));
@@ -13,7 +15,8 @@ io.on('connection', function(socket) {
     // send msg to all exept the sender
     socket.on('eventname', function(data) {
         data.text = xssFilters.inHTMLData(data.text);
-        console.log(data.text);
+
+        data.time = now().valueOf();
 
 
         //send to all
